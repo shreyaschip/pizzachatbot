@@ -1,0 +1,39 @@
+user_prompt,assistant_response
+Hi,Hello! Welcome! What kind of pizza would you like to order? Veg pizza or Non Veg pizza
+Veg pizza,Choose one from the menu options \nVeg Extravaganza \nPeppy Paneer\nDouble cheese Margherita\nCorn pizza\nFarmHouse \nMargherita
+Non Veg pizza,Choose one from the menu options \nChicken Dominator \nCheese and Pepperoni \nNon Veg Supreme \nChicken Mexicana \nChicken Golden Delight \nBarbeque Chicken \nChicken Fiesta
+Veg Extravaganza,Please choose the size?\nRegular\nMedium\nLarge
+Peppy Paneer,Please choose the size?\nRegular\nMedium\nLarge
+Double cheese Margherita,Please choose the size?\nRegular\nMedium\nLarge
+Corn pizza,Please choose the size?\nRegular\nMedium\nLarge
+FarmHouse,Please choose the size?\nRegular\nMedium\nLarge
+Margherita,Please choose the size?\nRegular\nMedium\nLarge
+Chicken Dominator,Please choose the size?\nRegular\nMedium\nLarge
+Cheese and Pepperoni,Please choose the size?\nRegular\nMedium\nLarge
+Non Veg Supreme,Please choose the size?\nRegular\nMedium\nLarge
+Chicken Mexicana,Please choose the size?\nRegular\nMedium\nLarge
+Chicken Golden Delight,Please choose the size?\nRegular\nMedium\nLarge
+Barbeque Chicken,Please choose the size?\nRegular\nMedium\nLarge
+Chicken Fiesta,Please choose the size?\nRegular\nMedium\nLarge
+Regular,"Would you like to customize your pizza?(Crust type,  Toppings,  Cheese etc)\nYes\nNo)"
+Medium,"Would you like to customize your pizza?(Crust type,  Toppings,  Cheese etc)\nYes\nNo)"
+Large,"Would you like to customize your pizza?(Crust type,  Toppings,  Cheese etc)\nYes\nNo)"
+Yes,Please choose how would you like to customize?\nCrust type\nToppings\nAdd Extra Cheese\nI am done customizing
+No, I don't want to customize. Do you want to order more pizza?\nYes\nNo
+No, I don't want more pizza. Please Provide your info
+Crust Type,Choose from the options below\nClassic Hand Tossed\nWheat Thin Crust\nCheese Burst\nFresh Pan pizza\nItalian Crust\nDouble Cheese Crunch
+Classic Hand Tossed,Please choose if anything else needs to be added\nCrust type\nToppings\nAdd Extra Cheese\nI am done customizing
+I am done customizing,Please choose the Quantity\n1\n2\n3\n4\n5\n6
+1,Please Provide your info. What's your full name?
+2,Please Provide your info. What's your full name?
+3,Please Provide your info. What's your full name?
+4,Please Provide your info. What's your full name?
+5,Please Provide your info. What's your full name?
+6,Please Provide your info. What's your full name?
+No, I don't want more pizza. Please Provide your info. What's your full name?
+John,Your mobile Number?
+1234567890,Please add your address and hit enter when you are done
+" 2nd Cross Rd,  KHB Colony,  5th Block,  Koramangala,  Bengaluru,  Karnataka 560095",Your order is placed. Thanks for choosing us. Hope to see you soon
+,Hello! How may I assist you today? Please let me know if you have any questions or if there is anything specific you would like to discuss.
+Veg Pizza,Sure thing! Would you like me to recommend some popular veg pizza options or would you like to explore
+hi,�

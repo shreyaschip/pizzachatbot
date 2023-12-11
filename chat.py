@@ -1,7 +1,19 @@
 import streamlit as st
 import replicate
 import os
+import pandas as pd
+
 try:
+    # Assuming your dataset is a CSV file with columns 'user_prompt' and 'assistant_response'
+    custom_dataset_path = r".\pizza.csv"
+    custom_dataset_data = pd.read_csv(custom_dataset_path)
+    custom_dataset = pd.DataFrame(custom_dataset_data)
+
+    print(type(custom_dataset))
+    print(custom_dataset.info())
+
+    #custom_dataset = pd.DataFrame(custom_dataset_data)
+    #print(custom_dataset.head())
     # App title
     st.set_page_config(page_title="🦙💬 Llama 2 Chatbot")
 
@@ -43,18 +55,35 @@ try:
         st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
-    # Function for generating LLaMA2 response. Refactored from https://github.com/a16z-infra/llama2-chatbot
     def generate_llama2_response(prompt_input):
-        string_dialogue = "You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'."
-        for dict_message in st.session_state.messages:
-            if dict_message["role"] == "user":
-                string_dialogue += "User: " + dict_message["content"] + "\n\n"
-            else:
-                string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
-        output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', 
-                            input={"prompt": f"{string_dialogue} {prompt_input} Assistant: ",
-                                    "temperature":temperature, "top_p":top_p, "max_length":max_length, "repetition_penalty":1})
-        return output
+        global custom_dataset
+        # Use the custom dataset if the prompt matches any user prompt in the dataset
+        user_prompt_match = custom_dataset[custom_dataset['user_prompt'] == prompt_input]
+        print(f"prompt_input: {prompt_input}")
+        print(f"user_prompt_match: {user_prompt_match}")
+
+        if not user_prompt_match.empty:
+            response = user_prompt_match['assistant_response'].values[0]
+        else:
+            # If no match is found, use the Llama 2 model to generate a response
+            string_dialogue = "You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'."
+            for dict_message in st.session_state.messages:
+                if dict_message["role"] == "user":
+                    string_dialogue += "User: " + dict_message["content"] + "\n\n"
+                else:
+                    string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
+
+            # Use Llama 2 model to generate a response
+            output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5',
+                                input={"prompt": f"{string_dialogue} {prompt_input} Assistant: ",
+                                        "temperature": temperature, "top_p": top_p, "max_length": max_length, "repetition_penalty": 1})
+            response = ''.join(output)
+
+            # Append the new user prompt and assistant response to the custom dataset
+            custom_dataset = pd.concat([custom_dataset, pd.DataFrame({'user_prompt': [prompt_input], 'assistant_response': [response]})], ignore_index=True)
+            custom_dataset.to_csv(custom_dataset_path, index=False)
+
+        return response
 
     # User-provided prompt
     if prompt := st.chat_input(disabled=not replicate_api):
